@@ -80,6 +80,21 @@ app.get('/bookmarks', (req, res) => {
       .json(bookmarks);
 });
 
+app.get('/bookmark/:id', (req, res) => {
+    const { id } = req.params;
+    const card = bookmarks.find(b => b.id == id);
+  
+    // make sure we found a card
+    if (!bookmark) {
+      logger.error(`Card with id ${id} not found.`);
+      return res
+        .status(404)
+        .send('Card Not Found');
+    }
+  
+    res.json(bookmark);
+});
+
 app.post('/bookmarks', (req, res) => {
     const { title, url, description, rating } = req.body
 
