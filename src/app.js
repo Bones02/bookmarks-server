@@ -80,9 +80,9 @@ app.get('/bookmarks', (req, res) => {
       .json(bookmarks);
 });
 
-app.get('/bookmark/:id', (req, res) => {
+app.get('/bookmarks/:id', (req, res) => {
     const { id } = req.params;
-    const card = bookmarks.find(b => b.id == id);
+    const bookmark = bookmarks.find(b => b.id == id);
   
     // make sure we found a card
     if (!bookmark) {
@@ -135,7 +135,7 @@ app.post('/bookmarks', (req, res) => {
 });
 
 app.delete('/bookmarks/:bookmark_id', (req, res) => {
-    const { id } = req.params;
+    const { bookmark_id } = req.params;
   
     const bookmarksIndex = bookmarks.findIndex(li => li.id == id);
   
@@ -146,7 +146,7 @@ app.delete('/bookmarks/:bookmark_id', (req, res) => {
         .send('Not Found');
     }
   
-    lists.splice(bookmarksIndex, 1);
+    bookmarks.splice(bookmarksIndex, 1);
   
     logger.info(`List with id ${id} deleted.`);
     res
