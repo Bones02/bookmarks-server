@@ -137,10 +137,10 @@ app.post('/bookmarks', (req, res) => {
 app.delete('/bookmarks/:bookmark_id', (req, res) => {
     const { bookmark_id } = req.params;
   
-    const bookmarksIndex = bookmarks.findIndex(li => li.id == id);
+    const bookmarksIndex = bookmarks.findIndex(li => li.id == bookmark_id);
   
     if (bookmarksIndex === -1) {
-      logger.error(`List with id ${id} not found.`);
+      logger.error(`List with id ${bookmark_id} not found.`);
       return res
         .status(404)
         .send('Not Found');
@@ -148,7 +148,7 @@ app.delete('/bookmarks/:bookmark_id', (req, res) => {
   
     bookmarks.splice(bookmarksIndex, 1);
   
-    logger.info(`List with id ${id} deleted.`);
+    logger.info(`List with id ${bookmark_id} deleted.`);
     res
       .status(204)
       .end();
